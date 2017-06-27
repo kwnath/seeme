@@ -4,9 +4,9 @@ class Message < ApplicationRecord
   # scope: :unread, -> { where read: false }
   belongs_to :meeting
 
-  scope :between, -> (sender_id,recipient_id) do
-     where(“(meeting.sender_id = ? AND meeting.recipient_id =?) OR (meeting.sender_id = ? AND meeting.recipient_id =?)”, sender_id,recipient_id, recipient_id, sender_id)
-   end
+  # scope :between, -> (sender_id,recipient_id) do
+  #    where(“(meeting.sender_id = ? AND meeting.recipient_id =?) OR (meeting.sender_id = ? AND meeting.recipient_id =?)”, sender_id,recipient_id, recipient_id, sender_id)
+  #  end
 
   def message_time
     created_at.strftime("%l:%M")

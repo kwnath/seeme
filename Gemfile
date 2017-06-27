@@ -10,6 +10,8 @@ gem 'rails', '5.0.4'
 gem 'redis'
 gem 'pundit'
 gem 'acts-as-taggable-on', '~> 4.0'
+gem 'simple_token_authentication', '~> 1.0'
+gem 'rest-client'
 
 group :development, :test do
   gem 'better_errors'
