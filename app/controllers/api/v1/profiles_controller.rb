@@ -1,4 +1,4 @@
-class Api::ProfilesController < ApplicationController
+class Api::V1::ProfilesController < ApplicationController
   def edit
   end
 

@@ -1,6 +1,11 @@
 class MessagesController < ApplicationController
    before_action :set_recipient, only: [:new, :create]
 
+   def index
+      # @messages = current_user.messages
+      @messages = Message.find(params[:meeting_id])
+   end
+
    def new
       @message = current_user.sent_messages.new
    end
@@ -11,18 +16,6 @@ class MessagesController < ApplicationController
       @message.save
    end
 
-   def index
-      @messages = current_user.messages
-   end
-
-   def destroy
-      @message = current_user.messages.destroy params[:id]
-   end
-
-   def show
-      @message = current_user.messages.find params[:id]
-   end
-
    private
 
    def message_params
@@ -30,6 +23,6 @@ class MessagesController < ApplicationController
    end
 
    def set_recipient
-       @recipient = User.find params[:user_id]
+       @recipient = User.find(params[:user_id])
    end
 end

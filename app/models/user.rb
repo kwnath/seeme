@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
 
   acts_as_taggable_on :interests
+  has_many :meeting
 end
