@@ -11,6 +11,7 @@ gem 'redis'
 gem 'pundit'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem "simple_token_authentication"
+gem 'aasm'
 
 group :development, :test do
   gem 'better_errors'
