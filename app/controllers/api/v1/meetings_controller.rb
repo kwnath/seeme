@@ -1,12 +1,12 @@
 class Api::V1::MeetingsController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User
-  before_action :set_meeting, only: [:show, :update]
+  before_action :authenticate_user!
+  before_action :set_meeting, only: [:show, :update, :destroy]
 
   # get /api/v1/meetings
   def index
     @meetings = policy_scope(Meeting)
-    # skip_authorization
-    authorize @meetings
+    # authorize @meetings
   end
 
   def show
@@ -14,7 +14,6 @@ class Api::V1::MeetingsController < Api::V1::BaseController
 
   def update
     if @meeting.update(meeting_params)
-      # skip_authorization
       render :show
     else
       render_error
@@ -25,16 +24,30 @@ class Api::V1::MeetingsController < Api::V1::BaseController
   end
 
   def create
+    @meeting = Meeting.new(meeting_params)
+    @meeting.sender = current_user
+    authorize @meeting
+    if @meeting.save
+      render :show
+    else
+      render_error
+    end
+  end
+
+  def destroy
+    @meeting.destroy
+    render :index
   end
 
   private
 
   def set_meeting
     @meeting = Meeting.find(params[:id])
+    authorize @meeting
   end
 
   def meeting_params
-    params.require(:meeting).permit(:content, :status)
+    params.require(:meeting).permit(:status)
   end
 
   def render_error

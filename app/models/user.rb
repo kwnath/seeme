@@ -14,5 +14,9 @@ class User < ApplicationRecord
   has_many :sender_meetings, class_name: "Meeting", foreign_key: "sender_id"
   has_many :recipient_meetings, class_name: "Meeting", foreign_key: "sender_id"
 
+  def meetings
+    Meeting.where(recipient_id: self.id).or(Meeting.where(sender_id: self.id))
+  end
+
   acts_as_token_authenticatable
 end
