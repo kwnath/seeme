@@ -1,0 +1,6 @@
+<%= form_for [@recipient, @user] do |f| %>
+     <%= f.text_field :content %>
+     <%= f.submit %>
+<% end %>
+
+<%= link_to "Send Message", user_messages_path(@user.id) %>
