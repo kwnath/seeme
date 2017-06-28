@@ -10,5 +10,9 @@ class User < ApplicationRecord
 
   acts_as_taggable_on :interests
   acts_as_token_authenticatable
-  has_many :meeting
+
+  def meetings
+    Meeting.where(recipient_id: self.id).or(Meeting.where(sender_id: self.id))
+  end
 end
+
