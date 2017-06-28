@@ -10,6 +10,7 @@ gem 'rails', '5.0.4'
 gem 'redis'
 gem 'pundit'
 gem 'acts-as-taggable-on', '~> 4.0'
+gem 'aasm'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'rest-client'
 
