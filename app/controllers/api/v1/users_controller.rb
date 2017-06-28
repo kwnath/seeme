@@ -14,6 +14,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   # GET /users/:id
 
   def create
+    # Send code, APPID and SECRET to weixin for openid and session_key
     code = params[:code]
 
     url = "https://api.weixin.qq.com/sns/jscode2session?appid=#{ENV['APPID']}&secret=#{ENV['SECRET']}&js_code=#{code}&grant_type=authorization_code"
@@ -22,11 +23,17 @@ class Api::V1::UsersController < Api::V1::BaseController
       url: url
     )
 
+    user = params[:userInfo]
+
+    # GET both openid and session_key
+
     result = JSON.parse(response.body)
     email = result['openid'] + "@seeme.ninja"
     password = result['session_key'].to_s
 
-    p result
+    # Conditions to find or create user.
+    # Find user - regenerates a token.
+    # Create user - creates a new user.
 
       @current_user = User.where(email: email).first
 
@@ -34,7 +41,13 @@ class Api::V1::UsersController < Api::V1::BaseController
       @current_user.authentication_token = Devise.friendly_token
       @current_user.save!
     else
-      @current_user = User.create(email: email, password: password, authentication_token: Devise.friendly_token)
+      @current_user = User.create(email: email,
+                               password: password,
+                               nickname: user['nickName'],
+                                 gender: user['gender'],
+                               language: user['language'],
+                                 avatar: user['avatarUrl'],
+                   authentication_token: Devise.friendly_token)
     end
     skip_authorization
     render json: @current_user.authentication_token
