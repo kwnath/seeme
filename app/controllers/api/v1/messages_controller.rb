@@ -1,6 +1,6 @@
 class Api::V1::MessagesController < Api::V1::BaseController
    acts_as_token_authentication_handler_for User
-   before_action :set_recipient, only: [:new, :create]
+   # before_action :set_recipient, only: [:new, :create]
 
    def index
       # @messages = current_user.messages
@@ -16,16 +16,17 @@ class Api::V1::MessagesController < Api::V1::BaseController
    end
 
    def create
-
+    Message.create(message_params)
    end
 
    private
 
    def message_params
-      params.require(:message).permit(:content)
+      # params.require(:meeting_id)
+      params.require(:meeting).permit(:message)
    end
 
    def set_recipient
-       @recipient = User.find(params[:user_id])
+       # @recipient = User.find(params[:user_id])
    end
 end
