@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :meetings do
         resources :messages, only: [:index, :new, :create]
       end
-      resources :profiles, only: [:edit, :show, :update]
+      resource :profile, only: [:edit, :show, :update]
     end
   end
 end
