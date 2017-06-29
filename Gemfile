@@ -14,6 +14,10 @@ gem 'aasm'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'rest-client'
 
+gem 'mina', '< 1', require: false
+gem 'mina-rsync', require: false
+gem 'mina-scp', require: false
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
