@@ -38,11 +38,6 @@ class Api::V1::UsersController < Api::V1::BaseController
       @current_user = User.where(email: email).first
 
     if @current_user
-      User.where(id: 1).first.gender = 1
-            User.where(id: 4).first.gender = 2
-      User.where(id: 2).first.gender = 1
-      User.where(id: 3).first.gender = 1
-
 
       # @current_user.authentication_token = Devise.friendly_token
       # @current_user.save!
