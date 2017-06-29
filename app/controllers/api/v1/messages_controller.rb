@@ -17,8 +17,8 @@ class Api::V1::MessagesController < Api::V1::BaseController
 
    def create
       @message = Message.new(message_params)
-      # @message.recipient_id = @recipient.id
       @message.save!
+      # @message.recipient_id = @recipient.id
       skip_authorization
    end
 
@@ -28,7 +28,7 @@ class Api::V1::MessagesController < Api::V1::BaseController
       params.require(:meeting).permit(:content)
    end
 
-   def set_recipient
-       # @recipient = User.find(params[:user_id])
-   end
+   # def set_recipient
+   #     @recipient = User.find(params[:user_id])
+   # end
 end

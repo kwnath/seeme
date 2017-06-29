@@ -25,6 +25,7 @@ class Api::V1::MeetingsController < Api::V1::BaseController
   def create
     @meeting = Meeting.new(meeting_params)
     @meeting.sender = current_user
+    @meeting.recipient = User.find(meeting_params[:recipient_id])
     authorize @meeting
     if @meeting.save
       render :show
@@ -46,7 +47,7 @@ class Api::V1::MeetingsController < Api::V1::BaseController
   end
 
   def meeting_params
-    params.require(:meeting).permit(:status)
+    params.require(:meeting).permit(:recipient_id)
   end
 
   def render_error
