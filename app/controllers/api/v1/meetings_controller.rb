@@ -29,6 +29,7 @@ class Api::V1::MeetingsController < Api::V1::BaseController
     authorize @meeting
     if @meeting.save
       render :show
+      render json: @meeting.id
     else
       render_error
     end
