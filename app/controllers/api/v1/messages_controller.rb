@@ -16,14 +16,16 @@ class Api::V1::MessagesController < Api::V1::BaseController
    end
 
    def create
-    Message.create(message_params)
+      @message = Message.new(message_params)
+      # @message.recipient_id = @recipient.id
+      @message.save!
+      skip_authorization
    end
 
    private
 
    def message_params
-      # params.require(:meeting_id)
-      params.require(:meeting).permit(:message)
+      params.require(:meeting).permit(:content)
    end
 
    def set_recipient
