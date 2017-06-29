@@ -4,6 +4,7 @@ json.(@user, :id,
              :gender,
              :language,
              :avatar,
+             :bio,
              :authentication_token,
              :created_at
      )

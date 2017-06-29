@@ -3,14 +3,22 @@ class Meeting < ApplicationRecord
 
   aasm :column => 'status' do
     state :pending, :initial => true
-    state :accepted, :declined
+    state :accepted, :declined, :closed
 
     event :accept do
       transitions :from => :pending, :to => :accepted
     end
 
+    event :accept do
+      transitions :from => :accept, :to => :closed
+    end
+
     event :decline do
       transitions :from => :pending, :to => :declined
+    end
+
+    event :decline do
+      transitions :from => :decline, :to => :closed
     end
 
     # event :pending do

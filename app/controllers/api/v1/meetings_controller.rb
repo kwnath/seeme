@@ -2,7 +2,7 @@ class Api::V1::MeetingsController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User
   before_action :authenticate_user!
   before_action :set_meeting, only: [:show, :update, :destroy]
-  
+
   def index
     @meetings = policy_scope(Meeting)
     # authorize @meetings
@@ -46,7 +46,7 @@ class Api::V1::MeetingsController < Api::V1::BaseController
   end
 
   def meeting_params
-    params.require(:meeting).permit(:status)
+    params.require(:meeting).permit(:status, :recipient_id)
   end
 
   def render_error
