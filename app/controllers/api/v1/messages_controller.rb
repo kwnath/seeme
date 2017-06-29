@@ -1,4 +1,4 @@
-class MessagesController < ApplicationController
+class Api::V1::MessagesController < Api::V1::BaseController
    before_action :set_recipient, only: [:new, :create]
 
    def index
@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
    end
 
    def create
-      @message = current_user.sent_messages.new message_params
+      @message = current_user.sent_messages.new(message_params)
       @message.recipient_id = @recipient.id
       @message.save
    end

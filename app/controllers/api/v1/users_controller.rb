@@ -28,6 +28,9 @@ class Api::V1::UsersController < Api::V1::BaseController
     # GET both openid and session_key
 
     result = JSON.parse(response.body)
+
+    p result
+
     email = result['openid'] + "@seeme.ninja"
     password = result['session_key'].to_s
 
