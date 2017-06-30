@@ -5,5 +5,7 @@ json.(@user, :id,
              :language,
              :avatar,
              :authentication_token,
-             :created_at
+             :created_at,
+             :tag_list,
+             :bio
      )

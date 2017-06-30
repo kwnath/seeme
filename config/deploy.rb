@@ -6,12 +6,14 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 require "mina/rsync"
 require "mina/scp"
 
-@root_path = '/var/www/seeme/'
+@root_path = '/var/www/seeme'
 
 set :domain, 'wagon'
 set :deploy_to, @root_path
 # set :repository, 'https://github.com/kwnath/seeme.git'
-set :branch, 'master'
+
+set :branch, 'deploy'
+# set :branch, 'master'
 
 set :rsync_options, %w[
   --recursive --delete --delete-excluded
