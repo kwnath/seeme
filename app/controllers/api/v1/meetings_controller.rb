@@ -28,8 +28,7 @@ class Api::V1::MeetingsController < Api::V1::BaseController
     @meeting.recipient = User.find(meeting_params[:recipient_id])
     authorize @meeting
     if @meeting.save
-      render :show
-      render json: @meeting.id
+      render json: @meeting
     else
       render_error
     end
