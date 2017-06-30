@@ -6,6 +6,10 @@ class MeetingPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    record.sender == user || record.recipient == user
+  end
+
   def update?
     meeting_owner_or_admin?
   end

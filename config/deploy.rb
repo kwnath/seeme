@@ -11,7 +11,9 @@ require "mina/scp"
 set :domain, 'wagon'
 set :deploy_to, @root_path
 # set :repository, 'https://github.com/kwnath/seeme.git'
+
 set :branch, 'deploy'
+# set :branch, 'master'
 
 set :rsync_options, %w[
   --recursive --delete --delete-excluded
