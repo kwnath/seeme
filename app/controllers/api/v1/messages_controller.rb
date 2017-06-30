@@ -25,7 +25,7 @@ class Api::V1::MessagesController < Api::V1::BaseController
    private
 
    def message_params
-      params.require(:meeting).permit(:content)
+      params.require(:meeting).permit(:content, :recipient_id)
    end
 
    # def set_recipient
