@@ -16,8 +16,13 @@ class Api::V1::MessagesController < Api::V1::BaseController
    end
 
    def create
-      @message = Message.new(message_params)
-      @message.save!
+    # byebug
+      @message = Message.create(message_params)
+      @message.meeting = Meeting.find(params[:meeting_id])
+      @message.save
+      render json: @message
+      # byebug
+      # @
       # @message.recipient_id = @recipient.id
       skip_authorization
    end
@@ -25,10 +30,10 @@ class Api::V1::MessagesController < Api::V1::BaseController
    private
 
    def message_params
-      params.require(:meeting).permit(:content, :recipient_id)
+      params.require(:message).permit(:content, :recipient_id)
    end
 
-   # def set_recipient
-   #     @recipient = User.find(params[:user_id])
+   # def set_meeting
+   #     @meeting = Meeting.find(params[:_id])
    # end
 end

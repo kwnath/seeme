@@ -7,7 +7,8 @@ class MeetingPolicy < ApplicationPolicy
   end
 
   def index?
-    record.sender == user || record.recipient == user
+    # record.sender == user || record.recipient == user
+    true
   end
 
   def update?
