@@ -73,11 +73,11 @@ ActiveRecord::Schema.define(version: 20170630074101) do
     t.datetime "updated_at",                                        null: false
     t.string   "authentication_token",   limit: 30
     t.string   "nickname"
-    t.boolean  "gender"
     t.string   "language"
     t.string   "avatar"
     t.boolean  "admin",                             default: false
     t.string   "bio"
+    t.integer  "gender"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

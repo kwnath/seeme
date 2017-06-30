@@ -38,8 +38,9 @@ class Api::V1::UsersController < Api::V1::BaseController
       @current_user = User.where(email: email).first
 
     if @current_user
-      @current_user.authentication_token = Devise.friendly_token
-      @current_user.save!
+
+      # @current_user.authentication_token = Devise.friendly_token
+      # @current_user.save!
     else
       @current_user = User.create(email: email,
                                password: password,
@@ -48,6 +49,10 @@ class Api::V1::UsersController < Api::V1::BaseController
                                language: user['language'],
                                  avatar: user['avatarUrl'],
                    authentication_token: Devise.friendly_token)
+      # If the devise token is equal to something in the database, regenerate a new one
+      while @current_user.authentication_token == User.where(authentication_token: @current_user.authentication_token).authentication_token
+        @current_user.update(authentication_token: Devise.friendly_token)
+      end
     end
     skip_authorization
     render json: @current_user.authentication_token
