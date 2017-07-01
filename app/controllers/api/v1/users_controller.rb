@@ -55,7 +55,8 @@ class Api::V1::UsersController < Api::V1::BaseController
       end
     end
     skip_authorization
-    render json: @current_user.authentication_token
+    # render json: @current_user.authentication_token
+    render json: @current_user
   end
 
   private
