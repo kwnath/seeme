@@ -22,6 +22,18 @@ class MeetingPolicy < ApplicationPolicy
     true
   end
 
+  def accept?
+    record.recipient == user
+  end
+
+  def decline?
+    record.recipient == user
+  end
+
+  def cancel?
+    meeting_owner_or_admin?
+  end
+
   private
 
   def meeting_owner_or_admin?
