@@ -16,8 +16,8 @@ class Api::V1::UsersController < Api::V1::BaseController
   def index
   @users = policy_scope(User)
 
-  lat1 = 11
-  lng1 = 9
+  lat1 = params[:lat]
+  lng1 = params[:lng]
 
   loc_current = []
   loc_user = []
