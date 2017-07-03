@@ -14,20 +14,18 @@ class Api::V1::UsersController < Api::V1::BaseController
   # end
 
   def index
+
   @users = policy_scope(User)
 
-  lat1 = @current_user.lat
-  lng1 = @current_user.lng
-
-  # loc_current = []
-  # loc_user = []
-  # loc_current << lat1
-  # loc_current << lng1
+  data = JSON.parse(response.body)
+  p data
+  lat1 =
+  lng1 = 3.331231
+  @nearby_users = []
 
   rad_per_deg = Math::PI/180  # PI / 180
   rkm = 6371                  # Earth radius in kilometers
   r = 6371000                # Earth radius in meters
-
 
   @users.select do |u|
 
@@ -46,14 +44,15 @@ class Api::V1::UsersController < Api::V1::BaseController
     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
 
     d = r * c
+    p d
 
-    d < 3 ? u = true : u = false
-
+    d < 3000 ? @nearby_users << u : ''
   end
 
+  render json: @nearby_users
+
 
   end
-
 
   # GET /users/:id
 

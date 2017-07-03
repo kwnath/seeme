@@ -22,3 +22,4 @@
     10.times do
     User.create(email: "'#{email.sample}'@gmail.com", nickname: '#{names.sample}', gender: '#{sex.sample}', avatar: '#{photo.sample}', bio: '#{bios.sample}', lat: '#{latitude.sample}', lng: '#{latitude.sample}')
     end
+
