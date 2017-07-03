@@ -77,8 +77,8 @@ ActiveRecord::Schema.define(version: 20170702155647) do
     t.string   "language"
     t.string   "avatar"
     t.boolean  "admin",                                                      default: false
-    t.integer  "gender"
     t.string   "bio"
+    t.integer  "gender"
     t.decimal  "lat",                               precision: 10, scale: 6
     t.decimal  "lng",                               precision: 10, scale: 6
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
