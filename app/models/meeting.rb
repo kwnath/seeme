@@ -3,7 +3,7 @@ class Meeting < ApplicationRecord
 
   aasm :column => 'status' do
     state :pending, :initial => true
-    state :accepted, :declined
+    state :accepted, :declined, :cancelled
 
     event :accept do
       transitions :from => :pending, :to => :accepted
@@ -13,9 +13,9 @@ class Meeting < ApplicationRecord
       transitions :from => :pending, :to => :declined
     end
 
-    # event :pending do
-    #   transitions :from => [:accepted, :declined], :to => :pending
-    # end
+    event :cancel do
+      transitions :from => [:accepted, :declined, :pending], :to => :cancelled
+    end
   end
   belongs_to :sender, class_name: "User", foreign_key: "sender_id"
   belongs_to :recipient, class_name: "User",foreign_key: "recipient_id"

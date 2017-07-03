@@ -1,7 +1,7 @@
 class Api::V1::MeetingsController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User
   before_action :authenticate_user!
-  before_action :set_meeting, only: [:show, :update, :destroy]
+  before_action :set_meeting, only: [:show, :update, :destroy, :accept, :decline, :cancel]
 
   def index
     @meetings = policy_scope(Meeting)
@@ -37,6 +37,24 @@ class Api::V1::MeetingsController < Api::V1::BaseController
   def destroy
     @meeting.destroy
     render :index
+  end
+
+  def accept
+    @meeting.accept
+    @meeting.save
+    render :show
+  end
+
+  def decline
+    @meeting.decline
+    @meeting.save
+    render :show
+  end
+
+  def cancel
+    @meeting.cancel
+    @meeting.save
+    render :show
   end
 
   private
