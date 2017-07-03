@@ -3,6 +3,9 @@ Rails.application.routes.draw do
    namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :users, only: [:index, :show, :create]
+      patch 'meetings/:id/accept', to: 'meetings#accept'
+      patch 'meetings/:id/decline', to: 'meetings#decline'
+      patch 'meetings/:id/cancel', to: 'meetings#cancel'
       resources :meetings do
         resources :messages, only: [:index, :new, :create]
       end

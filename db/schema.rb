@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170702155647) do
     t.integer  "recipient_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "aasm_state"
   end
 
   create_table "messages", force: :cascade do |t|
