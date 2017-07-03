@@ -27,12 +27,12 @@ class Api::V1::UsersController < Api::V1::BaseController
   rad_per_deg = Math::PI/180  # PI / 180
   rkm = 6371                  # Earth radius in kilometers
   r = 6371000                # Earth radius in meters
-
+  @nearby_users = []
 
   @users.select do |u|
 
-    lat2 = u.lat
-    lng2 = u.lng
+    lat2 = params[:lat]
+    lng2 = params[:lng]
 
     lat_1_rad = lat1 * rad_per_deg
     lat_2_rad = lat2 * rad_per_deg
@@ -47,10 +47,11 @@ class Api::V1::UsersController < Api::V1::BaseController
 
     d = r * c
 
-    d < 3 ? u = true : u = false
+    d < 3 ? @nearby_users << u : ''
 
   end
 
+  render json: @nearby_users
 
   end
 
