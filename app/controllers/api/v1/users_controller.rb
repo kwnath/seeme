@@ -49,7 +49,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   #   d < 3 ? @nearby_users << u : ''
 
-  end
+  # end
 
   # render json: @nearby_users
 
