@@ -16,8 +16,8 @@ class Api::V1::UsersController < Api::V1::BaseController
   def index
   @users = policy_scope(User)
 
-  lat1 = @current_user.lat
-  lng1 = @current_user.lng
+  lat1 = 11
+  lng1 = 9
 
   loc_current = []
   loc_user = []
@@ -31,8 +31,8 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   @users.select do |u|
 
-    lat2 = params[:lat]
-    lng2 = params[:lng]
+    lat2 = u.lat
+    lng2 = u.lng
 
     lat_1_rad = lat1 * rad_per_deg
     lat_2_rad = lat2 * rad_per_deg
