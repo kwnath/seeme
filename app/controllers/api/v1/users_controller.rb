@@ -18,8 +18,8 @@ class Api::V1::UsersController < Api::V1::BaseController
   # @users = User.all
  puts "these are params"
 
-  @response = JSON.parse(response)
-  # lat = response['lat']
+  # @response = JSON.parse(response)
+  @lat = params['lat']
   # lng = response['lng']
 
   # # lat = BigDecimal.new(lat1)
@@ -61,7 +61,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   #   # skip_authorization
   # # render json: @nearby_users
   # render json: @nearby_users
-  render json: @response
+  render json: @lat
   end
 
   # GET /users/:id
