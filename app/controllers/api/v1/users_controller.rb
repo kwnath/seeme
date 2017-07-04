@@ -23,14 +23,14 @@
   @lat = BigDecimal.new(lat1)
   lng = BigDecimal.new(lng1)
 
-  loc_current = []
-  loc_user = []
-  loc_current << lat
-  loc_current << lng
+  # loc_current = []
+  # loc_user = []
+  # loc_current << lat
+  # loc_current << lng
 
-  rad_per_deg = Math::PI/180  # PI / 180
-  rkm = 6371                  # Earth radius in kilometers
-  r = 6371000                # Earth radius in meters
+  # rad_per_deg = Math::PI/180  # PI / 180
+  # rkm = 6371                  # Earth radius in kilometers
+  # r = 6371000                # Earth radius in meters
 
   # @users.each do |u|
 
