@@ -14,8 +14,8 @@
   # end
 
   def index
-  # @users = policy_scope(User)
-  @users = User.all
+  @users = policy_scope(User)
+  # @users = User.all
  puts "these are params"
   # @response = JSON.parse(response)
   lat1 = params['lat']
