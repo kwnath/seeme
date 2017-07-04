@@ -17,12 +17,11 @@
   @users = policy_scope(User)
   # @users = User.all
  puts "these are params"
-  @response = JSON.parse(response)
   lat1 = params['lat']
   lng1 = params['lng']
 
-  lat = BigDecimal.new(lat1)
-  lng = BigDecimal.new(lng1)
+  @lat = BigDecimal.new(lat1)
+  @lng = BigDecimal.new(lng1)
 
   loc_current = []
   loc_user = []
@@ -58,7 +57,7 @@
   #     end
   #   end
     skip_authorization
-    render json: @response
+    render json: @lat, @lng
    end
 
  def search
