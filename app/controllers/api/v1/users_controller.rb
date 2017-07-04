@@ -21,44 +21,44 @@
   lat1 = params['lat']
   lng1 = params['lng']
 
-  @lat = BigDecimal.new(lat1)
-  @lng = BigDecimal.new(lng1)
-  # loc_current = []
-  # loc_user = []
-  # loc_current << @lat
-  # loc_current << @lng
+  lat = BigDecimal.new(lat1)
+  lng = BigDecimal.new(lng1)
 
-  # rad_per_deg = Math::PI/180  # PI / 180
-  # rkm = 6371                  # Earth radius in kilometers
-  # r = 6371000                # Earth radius in meters
-  # @nearby_users = []
+  loc_current = []
+  loc_user = []
+  loc_current << @lat
+  loc_current << @lng
 
-  # @users.each do |u|
+  rad_per_deg = Math::PI/180  # PI / 180
+  rkm = 6371                  # Earth radius in kilometers
+  r = 6371000                # Earth radius in meters
+  @nearby_users = []
 
-  #   lat2 = u.lat
-  #   lng2 = u.lng
+  @users.each do |u|
 
-  #   lat_1_rad = @lat * rad_per_deg
-  #   lat_2_rad = lat2 * rad_per_deg
+    lat2 = u.lat
+    lng2 = u.lng
 
-  #   dlat_rad = (lat2 - @lat) * rad_per_deg
-  #   dlon_rad = (lng2 - @lng) * rad_per_deg
+    lat_1_rad = lat * rad_per_deg
+    lat_2_rad = lat2 * rad_per_deg
+
+    dlat_rad = (lat2 - lat) * rad_per_deg
+    dlon_rad = (lng2 - lng) * rad_per_deg
 
 
-  #   a = Math.sin(dlat_rad / 2) * Math.sin(dlat_rad / 2) + Math.cos(lat_1_rad) * Math.cos(lat_2_rad) * Math.sin(dlon_rad/2) * Math.sin(dlon_rad/2)
+    a = Math.sin(dlat_rad / 2) * Math.sin(dlat_rad / 2) + Math.cos(lat_1_rad) * Math.cos(lat_2_rad) * Math.sin(dlon_rad/2) * Math.sin(dlon_rad/2)
 
-  #   c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
-  #   d = (r * c).round(2)
-  #   puts "------------------ Distance ---------------------"
-  #   puts d
-  #   # distance is in km
-  #     if d <= 3000
-  #       @nearby_users << {'user' => u, 'distance' => d}
-  #     end
-  #   end
-  # render json: @nearby_users
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+    d = (r * c).round(2)
+    puts "------------------ Distance ---------------------"
+    puts d
+    # distance is in km
+      if d <= 3000
+        @nearby_users << {'user' => u, 'distance' => d}
+      end
+    end
     skip_authorization
-    render json: @lat
+    render json: @nearby_users
    end
 
  def search
