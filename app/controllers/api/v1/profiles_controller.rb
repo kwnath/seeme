@@ -13,7 +13,6 @@ class Api::V1::ProfilesController < Api::V1::BaseController
     render :show
   end
 
-
   def addhobby
     # byebug
     @user = current_user
