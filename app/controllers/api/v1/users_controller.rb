@@ -26,8 +26,8 @@
 
   loc_current = []
   loc_user = []
-  loc_current << @lat
-  loc_current << @lng
+  loc_current << lat
+  loc_current << lng
 
   rad_per_deg = Math::PI/180  # PI / 180
   rkm = 6371                  # Earth radius in kilometers
