@@ -65,8 +65,11 @@ class Api::V1::UsersController < Api::V1::BaseController
       skip_authorization
 
   # render json: @nearby_users
-  render :json => { @nearby_users, @lat, @lng }
-  end
+render :json => {
+      :nearby_users => @nearby_users,
+      :lat => @lat,
+      :lng => @lng,
+   }
 
   # GET /users/:id
 
