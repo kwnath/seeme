@@ -18,9 +18,9 @@ class Api::V1::UsersController < Api::V1::BaseController
   # @users = User.all
  puts "these are params"
 
-  @response = JSON.parse(response.body)
-  lat = response['lat']
-  lng = response['lng']
+  @response = JSON.parse(response)
+  # lat = response['lat']
+  # lng = response['lng']
 
   # # lat = BigDecimal.new(lat1)
   # # lng = BigDecimal.new(lng1)
