@@ -76,12 +76,12 @@ ActiveRecord::Schema.define(version: 20170703115016) do
     t.string   "nickname"
     t.string   "language"
     t.string   "avatar"
-    t.boolean  "admin",                             default: false
-    t.integer  "gender"
+    t.boolean  "admin",                                                      default: false
     t.string   "bio"
-    t.float    "lat"
-    t.float    "lng"
-    t.string   "phone"
+    t.integer  "gender"
+    t.decimal  "lat",                               precision: 10, scale: 6
+    t.decimal  "lng",                               precision: 10, scale: 6
+    t.string   "phone",
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

@@ -8,5 +8,7 @@ json.(@user, :id,
              :created_at,
              :lat,
              :lng,
-             :phone
+             :phone,
+             :tag_list,
+             :bio
      )

@@ -12,4 +12,12 @@ class UserPolicy < ApplicationPolicy
   def update?
     true
   end
+
+  def addhobby?
+    update?
+  end
+
+  def search?
+    true
+  end
 end
