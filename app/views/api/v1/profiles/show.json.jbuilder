@@ -7,5 +7,7 @@ json.(@user, :id,
              :authentication_token,
              :created_at,
              :tag_list,
-             :bio
+             :bio,
+             :lat,
+             :lng
      )
