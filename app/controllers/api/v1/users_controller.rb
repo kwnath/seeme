@@ -44,20 +44,18 @@
     # GET both openid and session_key
 
     result = JSON.parse(response.body)
-    email = (result['openid'] || '')  + "@seeme.ninja"
-    password = result['session_key'].to_s
+    user['email'] = (result.fetch('openid', '')  + "@seeme.ninja"
+    user['password'] = (result.fetch('session_key', '')
 
     # Conditions to find or create user.
     # Find user - regenerates a token.
     # Create user - creates a new user.
 
-      @current_user = User.where(email: email).first
+      @current_user = User.find_by_email(email)
 
-    if @current_user
-      render :accepted
-      # @current_user.authentication_token = Devise.friendly_token
-      # @current_user.save!
-    else
+    user['authentication_token'] = Devise.friendly_token
+
+    unless @current_user
       @current_user = User.create(email: email,
                                password: password,
                                nickname: user['nickName'],
@@ -65,12 +63,7 @@
                                language: user['language'],
                                  avatar: user['avatarUrl'],
                    authentication_token: Devise.friendly_token)
-      # If the devise token is equal to something in the database, regenerate a new one
-      # while @current_user.authentication_token == User.where(authentication_token: @current_user.authentication_token).authentication_token
-      #   @current_user.update(authentication_token: Devise.friendly_token)
-      # end
     end
-    # render json: @current_user.authentication_token
     render json: @current_user
   end
 
