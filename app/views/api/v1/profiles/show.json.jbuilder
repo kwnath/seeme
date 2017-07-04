@@ -8,6 +8,6 @@ json.(@user, :id,
              :created_at,
              :tag_list,
              :bio,
-             :lat,
-             :lng
+             :latitude,
+             :longitude
      )
