@@ -22,8 +22,8 @@ class Api::V1::UsersController < Api::V1::BaseController
   lat1 = params['lat']
   lng1 = params['lng']
 
-  lat = BigDecimal.new(lat1)
-  lng = BigDecimal.new(lng1)
+  @lat = BigDecimal.new(lat1)
+  @lng = BigDecimal.new(lng1)
 
   # lat = lat1.to_f
   # lng = lng1.to_f
@@ -60,10 +60,12 @@ class Api::V1::UsersController < Api::V1::BaseController
     if d <= 3000
       @nearby_users << {'user' => u, 'distance' => d}
     end
+
   end
-    skip_authorization
+      skip_authorization
+
   # render json: @nearby_users
-  render json: @nearby_users
+  render json: { @nearby_users, @lat, @lng }
   end
 
   # GET /users/:id
