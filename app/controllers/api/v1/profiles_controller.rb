@@ -3,14 +3,14 @@ class Api::V1::ProfilesController < Api::V1::BaseController
 
   def show
     @user = current_user
-    # authorize @user
-        skip_authorization
+    authorize @user
+        # skip_authorization
   end
 
   def update
     @user = current_user
-    # authorize @user
-    skip_authorization
+    authorize @user
+    # skip_authorization
     @user.update(profile_params)
     render :show
   end
