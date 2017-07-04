@@ -17,8 +17,6 @@ class Api::V1::UsersController < Api::V1::BaseController
   @users = policy_scope(User)
   # @users = User.all
  puts "these are params"
-      skip_authorization
-
   # @response = JSON.parse(response)
   lat1 = params['lat']
   lng1 = params['lng']
@@ -63,13 +61,9 @@ class Api::V1::UsersController < Api::V1::BaseController
     end
 
   end
-
+  skip_authorization
   # render json: @nearby_users
-render :json => {
-      :nearby_users => @nearby_users,
-      :lat => @lat,
-      :lng => @lng,
-   }
+render json: @nearby_users
  end
 
 
