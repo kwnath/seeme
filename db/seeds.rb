@@ -24,5 +24,5 @@
     end
 
 
-(email: "Overseasmansion@gmail.com", password: 123456, nickname: "Shanghai xnode", language: nil, avatar: "https://unsplash.it/200/200/?random\n", admin: false, bio: nil, gender: nil, lat: 31.219831, lng: 121.443783)
-(email: "Huashan@gmail.com", password: 123456, nickname: "Huashan hospital", language: nil, avatar: "https://unsplash.it/200/200/?random\n", admin: false, bio: nil, gender: nil, lat: 31.217166, lng: 121.443487)
+(email: "Overseasmansion@gmail.com", password: 123456, nickname: "Shanghai xnode", language: nil, avatar: "https://unsplash.it/200/200/?random\n", admin: false, bio: nil, gender: nil, lat: 31.219830, lng: 121.443782)
+(email: "this@gmail.com", password: 123456, nickname: "Huashan Hospital", language: nil, avatar: "https://unsplash.it/200/200/?random\n", admin: false, bio: nil, gender: nil, lat: 31.217164, lng: 121.443484)

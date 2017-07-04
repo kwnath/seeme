@@ -32,7 +32,6 @@ class Api::V1::UsersController < Api::V1::BaseController
   rkm = 6371                  # Earth radius in kilometers
   r = 6371000                # Earth radius in meters
   @nearby_users = []
-  @distance = []
 
   @users.each do |u|
 
@@ -53,15 +52,13 @@ class Api::V1::UsersController < Api::V1::BaseController
     puts "------------------ Distance ---------------------"
     puts d
     # distance is in km
-    if d <= 0.11
-      @nearby_users << u
-      # distance = (d / 1000).floor
-      @distance << d
+    if d <= 3000
+      @nearby_users << {'user' => u, 'distance' => d}
     end
   end
     # skip_authorization
   # render json: @nearby_users
-  render json: { nearby_users: @nearby_users, distance: @distance}
+  render json: @nearby_users
 
   end
 
