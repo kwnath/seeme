@@ -56,14 +56,13 @@ class Api::V1::UsersController < Api::V1::BaseController
     puts "------------------ Distance ---------------------"
     puts d
     # distance is in km
-    if d <= 3000
-      @nearby_users << {'user' => u, 'distance' => d}
-    end
-
+      if d <= 3000
+        @nearby_users << {'user' => u, 'distance' => d}
+      end
     end
   # render json: @nearby_users
-      skip_authorization
-render json: @nearby_users
+    skip_authorization
+    render json: @nearby_users
    end
 
 
