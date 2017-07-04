@@ -57,7 +57,7 @@
   #     end
   #   end
     skip_authorization
-    render json: @lat, @lng
+    render json: @lat
    end
 
  def search
