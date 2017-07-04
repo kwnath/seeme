@@ -14,50 +14,61 @@ class Api::V1::UsersController < Api::V1::BaseController
   # end
 
   def index
-    @users = policy_scope(User)
+  @users = policy_scope(User)
+  # @users = User.all
+ puts "these are params"
+  # @response = JSON.parse(response)
+  lat1 = params['lat']
+  lng1 = params['lng']
 
-    lat1 = @current_user.lat
-    lng1 = @current_user.lng
+  @lat = BigDecimal.new(lat1)
+  @lng = BigDecimal.new(lng1)
 
-    # loc_current = []
-    # loc_user = []
-    # loc_current << lat1
-    # loc_current << lng1
+  # lat = lat1.to_f
+  # lng = lng1.to_f
 
-    rad_per_deg = Math::PI/180  # PI / 180
-    rkm = 6371                  # Earth radius in kilometers
-    r = 6371000                # Earth radius in meters
-    @nearby_users = []
+  loc_current = []
+  loc_user = []
+  loc_current << @lat
+  loc_current << @lng
 
-    @users.select do |u|
+  rad_per_deg = Math::PI/180  # PI / 180
+  rkm = 6371                  # Earth radius in kilometers
+  r = 6371000                # Earth radius in meters
+  @nearby_users = []
 
-      lat2 = params[:lat]
-      lng2 = params[:lng]
+  @users.each do |u|
 
-      lat_1_rad = lat1 * rad_per_deg
-      lat_2_rad = lat2 * rad_per_deg
+    lat2 = u.lat
+    lng2 = u.lng
 
-      dlat_rad = (lat2 - lat1) * rad_per_deg
-      dlon_rad = (lng2 - lng1) * rad_per_deg
+    lat_1_rad = @lat * rad_per_deg
+    lat_2_rad = lat2 * rad_per_deg
+
+    dlat_rad = (lat2 - @lat) * rad_per_deg
+    dlon_rad = (lng2 - @lng) * rad_per_deg
 
 
-      a = Math.sin(dlat_rad / 2) * Math.sin(dlat_rad / 2) + Math.cos(lat_1_rad) * Math.cos(lat_2_rad) * Math.sin(dlon_rad/2) * Math.sin(dlon_rad/2)
+    a = Math.sin(dlat_rad / 2) * Math.sin(dlat_rad / 2) + Math.cos(lat_1_rad) * Math.cos(lat_2_rad) * Math.sin(dlon_rad/2) * Math.sin(dlon_rad/2)
 
-      c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
-
-      d = r * c
-
-      d < 3 ? @nearby_users << u : ''
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+    d = (r * c).round(2)
+    puts "------------------ Distance ---------------------"
+    puts d
+    # distance is in km
+      if d <= 3000
+        @nearby_users << {'user' => u, 'distance' => d}
       end
+    end
+  # render json: @nearby_users
+    skip_authorization
     render json: @nearby_users
-  end
+   end
 
-  def search
+ def search
     @users = User.tagged_with(params[:tag], :any => true, :wild => true)
     authorize @users
-  end
-
-
+ end
   # GET /users/:id
 
   def create

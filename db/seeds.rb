@@ -22,3 +22,7 @@
     10.times do
     User.create(email: "'#{email.sample}'@gmail.com", nickname: '#{names.sample}', gender: '#{sex.sample}', avatar: '#{photo.sample}', bio: '#{bios.sample}', lat: '#{latitude.sample}', lng: '#{latitude.sample}')
     end
+
+
+(email: "Overseasmansion@gmail.com", password: 123456, nickname: "Shanghai xnode", language: nil, avatar: "https://unsplash.it/200/200/?random\n", admin: false, bio: nil, gender: nil, lat: 31.219830, lng: 121.443782)
+(email: "this@gmail.com", password: 123456, nickname: "Huashan Hospital", language: nil, avatar: "https://unsplash.it/200/200/?random\n", admin: false, bio: nil, gender: nil, lat: 31.217164, lng: 121.443484)
