@@ -17,13 +17,11 @@
     @users = policy_scope(User)
     lat = params['lat']
     lng = params['lng']
+    @nearby = User.near([lat, lng], 3)
 
-    @users.select do |user|
-      user.near([lat, lng], 3)
-    end
 
     skip_authorization
-    render json: @users
+    render json: @nearby
   end
 
  def search
