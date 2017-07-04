@@ -14,52 +14,16 @@
   # end
 
   def index
-  @users = policy_scope(User)
-  # @users = User.all
- puts "these are params"
-  lat1 = params['lat']
-  lng1 = params['lng']
+    @users = policy_scope(User)
+    lat = params['lat']
+    lng = params['lng']
 
-  # @lat = BigDecimal.new(lat1)
-  # lng = BigDecimal.new(lng1)
-
-  # loc_current = []
-  # loc_user = []
-  # loc_current << lat
-  # loc_current << lng
-
-  rad_per_deg = Math::PI/180  # PI / 180
-  rkm = 6371                  # Earth radius in kilometers
-  r = 6371000                # Earth radius in meters
-  @nearby_users = []
-
-  @users.each do |u|
-      unless u.lat.nil? || u.lat < 1 || u.lng.nil? || u.lng < 1
-
-      lat2 = u.lat
-      lng2 = u.lng
-
-      lat_1_rad = lat1 * rad_per_deg
-      lat_2_rad = lat2 * rad_per_deg
-
-      dlat_rad = (lat2 - lat1) * rad_per_deg
-      dlon_rad = (lng2 - lng1) * rad_per_deg
-
-
-      a = Math.sin(dlat_rad / 2) * Math.sin(dlat_rad / 2) + Math.cos(lat_1_rad) * Math.cos(lat_2_rad) * Math.sin(dlon_rad/2) * Math.sin(dlon_rad/2)
-
-      c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
-      d = (r * c).round(2)
-      puts "------------------ Distance ---------------------"
-      puts d
-      # distance is in km
-        if d <= 3000
-          @nearby_users << {'user' => u, 'distance' => d}
-        end
-      end
+    @users.select do |user|
+      user.near([lat, lng], 3)
     end
+
     skip_authorization
-    render json: @nearby_users
+    render json: @users
   end
 
  def search

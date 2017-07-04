@@ -6,7 +6,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and
-
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
   # May need this for facebook/etc logins :omniauthable
   devise :database_authenticatable, :trackable, :validatable, :registerable
 
