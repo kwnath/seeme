@@ -48,7 +48,6 @@
 
     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
     d = (r * c).round(2)
-  end
     puts "------------------ Distance ---------------------"
     puts d
     # distance is in km
