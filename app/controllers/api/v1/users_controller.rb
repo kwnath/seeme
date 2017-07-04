@@ -17,8 +17,10 @@ class Api::V1::UsersController < Api::V1::BaseController
   @users = policy_scope(User)
   # @users = User.all
  puts "these are params"
-  lat1 = params['lat']
-  lng1 = params['lng']
+
+  response = JSON.parse(response.body)
+  lat1 = response['lat']
+  lng1 = response['lng']
 
   lat = BigDecimal.new(lat1)
   lng = BigDecimal.new(lng1)
