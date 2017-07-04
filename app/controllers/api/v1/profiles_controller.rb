@@ -9,7 +9,6 @@ class Api::V1::ProfilesController < Api::V1::BaseController
   def update
     @user = current_user
     authorize @user
-    # skip_authorization
     @user.update(profile_params)
     render :show
   end
