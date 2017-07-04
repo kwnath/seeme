@@ -19,11 +19,11 @@ class Api::V1::UsersController < Api::V1::BaseController
  puts "these are params"
 
   response = JSON.parse(response.body)
-  lat1 = response['lat']
-  lng1 = response['lng']
+  lat = response['lat']
+  lng = response['lng']
 
-  lat = BigDecimal.new(lat1)
-  lng = BigDecimal.new(lng1)
+  # lat = BigDecimal.new(lat1)
+  # lng = BigDecimal.new(lng1)
 
   loc_current = []
   loc_user = []
