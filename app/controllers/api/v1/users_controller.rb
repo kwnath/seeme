@@ -34,7 +34,7 @@
   # @nearby_users = []
 
   @users.each do |u|
-      unless u.lat == null || u.lat == 0 || u.lng == null || u.lng == 0
+      unless u.lat.nil? || u.lat == 0 || u.lng.nil? || u.lng == 0
 
       lat2 = u.lat
       lng2 = u.lng
