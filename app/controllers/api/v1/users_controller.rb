@@ -31,10 +31,10 @@
   rad_per_deg = Math::PI/180  # PI / 180
   rkm = 6371                  # Earth radius in kilometers
   r = 6371000                # Earth radius in meters
-  # @nearby_users = []
+  @nearby_users = []
 
   @users.each do |u|
-      unless u.lat.nil? || u.lat == 0 || u.lng.nil? || u.lng == 0
+      unless u.lat.nil? || u.lat < 1 || u.lng.nil? || u.lng < 1
 
       lat2 = u.lat
       lng2 = u.lng
@@ -59,7 +59,7 @@
       end
     end
     skip_authorization
-    render json: @users
+    render json: @nearby_users
   end
 
  def search
