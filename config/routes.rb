@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       patch 'meetings/:id/accept', to: 'meetings#accept'
       patch 'meetings/:id/decline', to: 'meetings#decline'
       patch 'meetings/:id/cancel', to: 'meetings#cancel'
+      patch 'profile/addhobby', to: 'profiles#addhobby'
+      patch 'users/search', to: 'users#search'
       resources :meetings do
         resources :messages, only: [:index, :new, :create]
       end

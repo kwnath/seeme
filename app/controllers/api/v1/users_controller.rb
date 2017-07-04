@@ -17,18 +17,20 @@ class Api::V1::UsersController < Api::V1::BaseController
   @users = policy_scope(User)
   # @users = User.all
  puts "these are params"
+  # @response = JSON.parse(response)
+  lat1 = params['lat']
+  lng1 = params['lng']
 
-  response = JSON.parse(response.body)
-  lat = response['lat']
-  lng = response['lng']
+  @lat = BigDecimal.new(lat1)
+  @lng = BigDecimal.new(lng1)
 
-  # lat = BigDecimal.new(lat1)
-  # lng = BigDecimal.new(lng1)
+  # lat = lat1.to_f
+  # lng = lng1.to_f
 
   loc_current = []
   loc_user = []
-  loc_current << lat
-  loc_current << lng
+  loc_current << @lat
+  loc_current << @lng
 
   rad_per_deg = Math::PI/180  # PI / 180
   rkm = 6371                  # Earth radius in kilometers
@@ -40,11 +42,11 @@ class Api::V1::UsersController < Api::V1::BaseController
     lat2 = u.lat
     lng2 = u.lng
 
-    lat_1_rad = lat * rad_per_deg
+    lat_1_rad = @lat * rad_per_deg
     lat_2_rad = lat2 * rad_per_deg
 
-    dlat_rad = (lat2 - lat) * rad_per_deg
-    dlon_rad = (lng2 - lng) * rad_per_deg
+    dlat_rad = (lat2 - @lat) * rad_per_deg
+    dlon_rad = (lng2 - @lng) * rad_per_deg
 
 
     a = Math.sin(dlat_rad / 2) * Math.sin(dlat_rad / 2) + Math.cos(lat_1_rad) * Math.cos(lat_2_rad) * Math.sin(dlon_rad/2) * Math.sin(dlon_rad/2)
@@ -54,16 +56,19 @@ class Api::V1::UsersController < Api::V1::BaseController
     puts "------------------ Distance ---------------------"
     puts d
     # distance is in km
-    if d <= 3000
-      @nearby_users << {'user' => u, 'distance' => d}
+      if d <= 3000
+        @nearby_users << {'user' => u, 'distance' => d}
+      end
     end
-  end
-    # skip_authorization
   # render json: @nearby_users
-  render json: @nearby_users
+    skip_authorization
+    render json: @nearby_users
+   end
 
-  end
-
+ def search
+    @users = User.tagged_with(params[:tag], :any => true, :wild => true)
+    authorize @users
+ end
   # GET /users/:id
 
   def create
@@ -118,7 +123,6 @@ class Api::V1::UsersController < Api::V1::BaseController
     @user = User.find(params[:id])
     authorize @user  # For Pundit
   end
-
 end
 
 
