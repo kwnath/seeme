@@ -61,7 +61,7 @@
       end
     end
   # render json: @nearby_users
-    skip_authorization
+    # skip_authorization
     render json: @lat
    end
 
