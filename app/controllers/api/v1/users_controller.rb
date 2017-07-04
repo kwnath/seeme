@@ -65,7 +65,10 @@ class Api::V1::UsersController < Api::V1::BaseController
     render json: @nearby_users
    end
 
-
+ def search
+    @users = User.tagged_with(params[:tag], :any => true, :wild => true)
+    authorize @users
+ end
   # GET /users/:id
 
   def create
@@ -120,7 +123,6 @@ class Api::V1::UsersController < Api::V1::BaseController
     @user = User.find(params[:id])
     authorize @user  # For Pundit
   end
-
 end
 
 

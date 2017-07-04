@@ -14,9 +14,19 @@ class Api::V1::ProfilesController < Api::V1::BaseController
     render :show
   end
 
+
+  def addhobby
+    # byebug
+    @user = current_user
+    authorize @user
+    @user.tag_list.add(params[:hobby])
+    @user.save
+    render :show
+  end
+
   private
 
   def profile_params
-    params.require(:user).permit(:nickname, :gender, :language, :avatar, :bio, :tag_list, :lat, :lng)
+    params.require(:user).permit(:nickname, :gender, :language, :avatar, :bio, :tag_list, :lat, :lng, :phone)
   end
 end
