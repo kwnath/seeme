@@ -11,6 +11,13 @@ class Api::V1::UsersController < Api::V1::BaseController
     # authorize @user
   end
 
+    # byebug
+  def search
+    @users = User.tagged_with(params[:tag], :any => true, :wild => true)
+    authorize @users
+  end
+
+
   # GET /users/:id
 
   def create

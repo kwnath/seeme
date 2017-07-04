@@ -8,4 +8,5 @@ class ProfilePolicy < ApplicationPolicy
     # record.user == user
     true
   end
+
 end
