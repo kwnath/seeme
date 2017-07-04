@@ -31,7 +31,7 @@
   rad_per_deg = Math::PI/180  # PI / 180
   rkm = 6371                  # Earth radius in kilometers
   r = 6371000                # Earth radius in meters
-  @nearby_users = []
+  # @nearby_users = []
 
   @users.each do |u|
 
@@ -52,9 +52,9 @@
     puts "------------------ Distance ---------------------"
     puts d
     # distance is in km
-      if d <= 3000
-        @nearby_users << {'user' => u, 'distance' => d}
-      end
+      # if d <= 3000
+      #   @nearby_users << {'user' => u, 'distance' => d}
+      # end
     end
     skip_authorization
     render json: @lat
