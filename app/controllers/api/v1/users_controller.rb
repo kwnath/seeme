@@ -20,7 +20,6 @@
     @nearby = User.near([lat, lng], 3)
 
 
-    skip_authorization
     render json: @nearby
   end
 
@@ -71,7 +70,6 @@
       #   @current_user.update(authentication_token: Devise.friendly_token)
       # end
     end
-    skip_authorization
     # render json: @current_user.authentication_token
     render json: @current_user
   end
