@@ -25,13 +25,12 @@
 
   loc_current = []
   loc_user = []
-  loc_current << @lat
-  loc_current << @lng
+  loc_current << lat
+  loc_current << lng
 
   rad_per_deg = Math::PI/180  # PI / 180
   rkm = 6371                  # Earth radius in kilometers
   r = 6371000                # Earth radius in meters
-  # @nearby_users = []
 
   @users.each do |u|
 
@@ -48,7 +47,7 @@
     a = Math.sin(dlat_rad / 2) * Math.sin(dlat_rad / 2) + Math.cos(lat_1_rad) * Math.cos(lat_2_rad) * Math.sin(dlon_rad/2) * Math.sin(dlon_rad/2)
 
     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
-    @d = (r * c).round(2)
+    d = (r * c).round(2)
   end
   #   puts "------------------ Distance ---------------------"
   #   puts d
@@ -58,7 +57,7 @@
   #     end
   #   end
     skip_authorization
-    render json: @d
+    render json: @lat
    end
 
  def search
