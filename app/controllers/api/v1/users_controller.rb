@@ -14,16 +14,16 @@ class Api::V1::UsersController < Api::V1::BaseController
   # end
 
   def index
-  @users = policy_scope(User)
-  # @users = User.all
+  # @users = policy_scope(User)
+  @users = User.all
  puts "these are params"
 
   # @response = JSON.parse(response)
-  lat = params['lat']
-  lng = params['lng']
+  lat1 = params['lat']
+  lng1 = params['lng']
 
-  # # lat = BigDecimal.new(lat1)
-  # # lng = BigDecimal.new(lng1)
+  lat = BigDecimal.new(lat1)
+  lng = BigDecimal.new(lng1)
 
   loc_current = []
   loc_user = []
@@ -58,7 +58,7 @@ class Api::V1::UsersController < Api::V1::BaseController
       @nearby_users << {'user' => u, 'distance' => d}
     end
   end
-    # skip_authorization
+    skip_authorization
   # render json: @nearby_users
   render json: @nearby_users
   end
