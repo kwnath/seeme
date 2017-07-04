@@ -15,7 +15,6 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def index
   @users = policy_scope(User)
-    skip_authorization
   # @users = User.all
  puts "these are params"
   # @response = JSON.parse(response)
@@ -61,10 +60,11 @@ class Api::V1::UsersController < Api::V1::BaseController
       @nearby_users << {'user' => u, 'distance' => d}
     end
 
-  end
+    end
   # render json: @nearby_users
+      skip_authorization
 render json: @nearby_users
- end
+   end
 
 
   # GET /users/:id
