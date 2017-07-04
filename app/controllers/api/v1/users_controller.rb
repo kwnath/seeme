@@ -22,11 +22,11 @@ class Api::V1::UsersController < Api::V1::BaseController
   lat1 = params['lat']
   lng1 = params['lng']
 
-  # lat = BigDecimal.new(lat1)
-  # lng = BigDecimal.new(lng1)
+  lat = BigDecimal.new(lat1)
+  lng = BigDecimal.new(lng1)
 
-  lat = lat1.to_f
-  lng = lng1.to_f
+  # lat = lat1.to_f
+  # lng = lng1.to_f
 
   loc_current = []
   loc_user = []
