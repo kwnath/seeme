@@ -11,8 +11,8 @@ class User < ApplicationRecord
 
   has_many :messages, class_name: "Message", foreign_key: "recipient_id"
   has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
-  validates :longitude, presence: true
-  validates :latitude, presence: true
+  geocoded_by :users
+
   acts_as_taggable
   acts_as_taggable_on :interests
 #   has_many :sender_meetings, class_name: "Meeting", foreign_key: "sender_id"
@@ -22,5 +22,7 @@ class User < ApplicationRecord
   def meetings
     Meeting.where(recipient_id: self.id).or(Meeting.where(sender_id: self.id))
   end
+
+
 end
 
