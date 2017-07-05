@@ -7,7 +7,6 @@ class Api::V1::UsersController < Api::V1::BaseController
   before_action :set_user, only: [ :show ]
 
 
-  # GET /users
   # def index
   #   @users = policy_scope(User)
   #   # authorize @user
@@ -16,31 +15,37 @@ class Api::V1::UsersController < Api::V1::BaseController
   def index
   @users = policy_scope(User)
   # @users = User.all
- puts "these are params"
   # @response = JSON.parse(response)
-  lat1 = params['lat']
-  lng1 = params['lng']
+  # lat1 = params['lat']
+  # lng1 = params['lng']
 
-  @lat = BigDecimal.new(lat1)
-  @lng = BigDecimal.new(lng1)
+  # @lat = BigDecimal.new(lat1)
+  # @lng = BigDecimal.new(lng1)
 
-  # lat = lat1.to_f
-  # lng = lng1.to_f
+  @lat = 3.222
+  @lng = 2.222
 
-  loc_current = []
-  loc_user = []
-  loc_current << @lat
-  loc_current << @lng
+
+
+ #  # lat = lat1.to_f
+ #  # lng = lng1.to_f
+
+ #  loc_current = []
+ #  loc_user = []
+ #  loc_current << @lat
+ #  loc_current << @lng
 
   rad_per_deg = Math::PI/180  # PI / 180
-  rkm = 6371                  # Earth radius in kilometers
   r = 6371000                # Earth radius in meters
   @nearby_users = []
 
   @users.each do |u|
 
+    if u.lat != nil
+
     lat2 = u.lat
     lng2 = u.lng
+
 
     lat_1_rad = @lat * rad_per_deg
     lat_2_rad = lat2 * rad_per_deg
@@ -53,12 +58,14 @@ class Api::V1::UsersController < Api::V1::BaseController
 
     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
     d = (r * c).round(2)
-    puts "------------------ Distance ---------------------"
-    puts d
+    # puts "------------------ Distance ---------------------"
+    # puts d
     # distance is in km
-      if d <= 3000
+      if d <= 300000000
         @nearby_users << {'user' => u, 'distance' => d}
       end
+    else
+    end
     end
   # render json: @nearby_users
     skip_authorization

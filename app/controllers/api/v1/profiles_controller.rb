@@ -26,6 +26,6 @@ class Api::V1::ProfilesController < Api::V1::BaseController
   private
 
   def profile_params
-    params.require(:user).permit(:nickname, :gender, :language, :avatar, :bio, :tag_list, :lat, :lng, :phone)
+    params.require(:user).permit(:nickname, :gender, :language, :avatar, :bio, :tag_list, :lat, :lng)
   end
 end
