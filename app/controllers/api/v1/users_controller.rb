@@ -11,7 +11,6 @@
 
   def index
     @users = policy_scope(User)
-    authorize @users
     lat = params['latitude']
     lng = params['longitude']
     @nearby = User.near([lat, lng], 3, :units => :km)
