@@ -13,19 +13,20 @@ class Api::V1::ProfilesController < Api::V1::BaseController
     authorize current_user
 
     @user = current_user
+    @user.tag_list.add(params[:hobby]) if params[:hobby]
     @user.update(profile_params)
     render :show
   end
 
-  def addhobby
-    # byebug
-    authorize current_user
+  # def addhobby
+  #   # byebug
+  #   authorize current_user
 
-    @user = current_user
-    @user.tag_list.add(params[:hobby])
-    @user.save
-    render :show
-  end
+  #   @user = current_user
+  #   @user.tag_list.add(params[:hobby])
+  #   @user.save
+  #   render :show
+  # end
 
   private
 

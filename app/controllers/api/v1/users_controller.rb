@@ -10,9 +10,10 @@
   URL = "https://api.weixin.qq.com/sns/jscode2session".freeze
 
   def index
+    # byebug
     @users = policy_scope(User)
-    lat = params['latitude']
-    lng = params['longitude']
+    lat = params[:latitude]
+    lng = params[:longitude]
     @nearby = User.near([lat, lng], 3, :units => :km)
 
 
