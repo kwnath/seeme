@@ -18,10 +18,11 @@
   end
 
    def search
-
-
-      @users = User.tagged_with(params[:tag], :any => true, :wild => true)
-      authorize @users
+     lat = params['latitude']
+     lng = params['longitude']
+     @users = User.near([lat, lng], 3, :units => :km)
+     @users = @users.tagged_with(params[:tag], :any => true, :wild => true)
+     authorize @users
    end
   # GET /users/:id
 

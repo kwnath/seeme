@@ -49,19 +49,19 @@ class Api::V1::MeetingsController < Api::V1::BaseController
 
   def accept
     @meeting.accept
-    @meeting.save
+    @meeting.save(:validate => false)
     render :show
   end
 
   def decline
     @meeting.decline
-    @meeting.save
+    @meeting.save(:validate => false)
     render :show
   end
 
   def cancel
     @meeting.cancel
-    @meeting.save
+    @meeting.save(:validate => false)
     render :show
   end
 
