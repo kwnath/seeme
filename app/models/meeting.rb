@@ -22,7 +22,7 @@ class Meeting < ApplicationRecord
   has_many :messages
 
   scope :between_user_ids, -> (user_a_id, user_b_id) { where("(recipient_id = ? and sender_id = ?) or (recipient_id = ? and sender_id = ?)", user_a_id, user_b_id, user_b_id, user_a_id) }
-  scope :within_a_day, -> { where("created_at > ?", Date.yesterday) }
+  scope :within_a_day, -> { where("created_at > ?", Time.now - 1.day ) }
 
   validate :not_same_user
   validate :not_same_day
