@@ -13,7 +13,7 @@ class Api::V1::ProfilesController < Api::V1::BaseController
     authorize current_user
 
     @user = current_user
-    @user.tag_list.add(params[:hobby]) if params[:hobby]
+    @user.tag_list.add(params[:tag]) if params[:tag]
     @user.update(profile_params)
     render :show
   end
