@@ -11,20 +11,22 @@
 
   def index
     @users = policy_scope(User)
+    authorize @users
     lat = params['latitude']
     lng = params['longitude']
     @nearby = User.near([lat, lng], 3, :units => :km)
+    @nearby = @nearby.tagged_with(params[:tag], :any => true, :wild => true)
     render json: @nearby
   end
 
-   def search
-     lat = params['latitude']
-     lng = params['longitude']
-     @users = User.near([lat, lng], 3, :units => :km)
-     @users = @users.tagged_with(params[:tag], :any => true, :wild => true)
-     authorize @users
-     render json: @users
-   end
+   # def search
+   #   lat = params['latitude']
+   #   lng = params['longitude']
+   #   @users = User.near([lat, lng], 3, :units => :km)
+   #   @users = @users.tagged_with(params[:tag], :any => true, :wild => true)
+   #   authorize @users
+   #   render json: @users
+   # end
   # GET /users/:id
 
   def create
