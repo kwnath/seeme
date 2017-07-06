@@ -23,6 +23,7 @@
      @users = User.near([lat, lng], 3, :units => :km)
      @users = @users.tagged_with(params[:tag], :any => true, :wild => true)
      authorize @users
+     render json: @users
    end
   # GET /users/:id
 
