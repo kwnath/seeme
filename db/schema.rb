@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705034206) do
+ActiveRecord::Schema.define(version: 20170706062326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20170705034206) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "aasm_state"
+    t.index ["sender_id", "recipient_id"], name: "index_meetings_on_sender_id_and_recipient_id", unique: true, using: :btree
   end
 
   create_table "messages", force: :cascade do |t|

@@ -5,6 +5,7 @@ class Api::V1::MeetingsController < Api::V1::BaseController
 
   def index
     @meetings = policy_scope(Meeting)
+    @meetings = @meetings.within_a_day
     # authorize @meetings
   end
 
@@ -23,14 +24,21 @@ class Api::V1::MeetingsController < Api::V1::BaseController
   end
 
   def create
-    @meeting = Meeting.new(meeting_params)
-    @meeting.sender = current_user
-    @meeting.recipient = User.find(meeting_params[:recipient_id])
-    authorize @meeting
-    if @meeting.save
-      render json: @meeting
+
+    meetings = Meeting.between_user_ids(current_user.id, meeting_params[:recipient_id])
+    # byebug
+    if meetings.empty? || meetings.last.created_at < Time.now - 1.day
+      @meeting = Meeting.new
+      @meeting.sender = current_user
+      @meeting.recipient = User.find(meeting_params[:recipient_id])
+      authorize @meeting
+      if @meeting.save
+        render json: @meeting
+      else
+        render_error
+      end
     else
-      render_error
+      render json: meetings.last
     end
   end
 
