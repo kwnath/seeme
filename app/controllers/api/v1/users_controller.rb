@@ -14,7 +14,11 @@
     lat = params['latitude']
     lng = params['longitude']
     @nearby = User.near([lat, lng], 3, :units => :km)
-    @nearby = @nearby.tagged_with(params[:tag], :any => true, :wild => true)
+
+
+    @nearby = @nearby.tagged_with(params[:tag], :any => true, :wild => true) if params[:tag].present?
+
+
     render json: @nearby
   end
 
