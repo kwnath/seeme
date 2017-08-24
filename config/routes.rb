@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Blazer::Engine, at: "blazer"
+
   devise_for :users
    namespace :api, defaults: { format: :json } do
     namespace :v1 do

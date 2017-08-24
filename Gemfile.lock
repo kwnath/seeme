@@ -50,8 +50,13 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    blazer (1.8.0)
+      chartkick
+      rails
+      safely_block (>= 0.1.1)
     builder (3.2.3)
     byebug (9.0.6)
+    chartkick (2.2.4)
     coderay (1.1.1)
     concurrent-ruby (1.0.5)
     debug_inspector (0.0.3)
@@ -63,6 +68,7 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
+    errbase (0.0.3)
     erubis (2.7.0)
     ffi (1.9.18)
     figaro (1.1.1)
@@ -153,6 +159,8 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    safely_block (0.2.0)
+      errbase
     simple_token_authentication (1.15.1)
       actionmailer (>= 3.2.6, < 6)
       actionpack (>= 3.2.6, < 6)
@@ -191,6 +199,7 @@ DEPENDENCIES
   acts-as-taggable-on (~> 4.0)
   better_errors
   binding_of_caller
+  blazer
   devise
   figaro
   geocoder
@@ -215,4 +224,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.15.1
+   1.15.3
